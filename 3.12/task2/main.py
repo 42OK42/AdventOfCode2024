@@ -20,7 +20,6 @@ def find_do(content, position):
 
 def find_dont(content, position):
     pattern = r"don't\(\)"
-    # Prüfe, ob an der Position "don't()" beginnt
     if re.match(pattern, content[position:]):
         return True
     return False
@@ -29,7 +28,6 @@ def find_multiply(content, position):
     pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
     match = re.match(pattern, content[position:])
     if match:
-        print(f"Gefunden: {match.group(0)}")  # Debug-Ausgabe
         return True
     return False
 
@@ -46,7 +44,7 @@ def multiply_and_add(content, position, sum):
     return sum, position
 
 def main():
-    file_path = 'text.txt'  # Einfach nur der Dateiname, da sie im gleichen Verzeichnis liegt
+    file_path = 'text.txt'
     content = read_file(file_path)
     
     if not content:
