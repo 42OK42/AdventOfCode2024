@@ -6,10 +6,10 @@ def read_file(file_path):
         with open(file_path, 'r') as file:
             content = file.read()
         if not content:
-            print(f"Warnung: Die Datei {file_path} ist leer!")
+            print(f"Warning: File {file_path} is empty!")
         return content
     except FileNotFoundError:
-        print(f"Fehler: Die Datei {file_path} wurde nicht gefunden!")
+        print(f"Error: File {file_path} not found!")
         return ""
 
 def find_do(content, position):
@@ -38,6 +38,7 @@ def multiply_and_add(content, position, sum):
     if match:
         num1 = int(match.group(1))
         num2 = int(match.group(2))
+        print(f"Found multiplication: {num1} * {num2} = {num1 * num2}")
         sum += num1 * num2
         position += len(match.group(0))
     
@@ -50,8 +51,7 @@ def main():
     if not content:
         return
         
-    print("Länge des gelesenen Inhalts:", len(content))
-    print("Erste 50 Zeichen:", content[:50])
+    print("Length of read content:", len(content))
     
     i = 0
     sum = 0
@@ -64,7 +64,7 @@ def main():
                 i += 1
         while not find_do(content, i) and i < length:
             i += 1
-    print("Summe der gültigen Multiplikationen:", sum)
+    print("Sum of valid multiplications:", sum)
 
 if __name__ == "__main__":
     main()
