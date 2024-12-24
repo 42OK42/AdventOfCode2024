@@ -126,7 +126,7 @@ jjk XOR vht -> z13
 y18 AND x18 -> dwt
 vgf OR bkn -> ggg
 gvj XOR jsd -> z11
-cpg OR nmv -> pvr //0 and 0
+cpg OR nmv -> pvr
 x15 XOR y15 -> dvj
 x44 AND y44 -> nng
 x33 XOR y33 -> vqn

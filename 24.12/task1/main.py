@@ -100,7 +100,11 @@ def main():
     print(f"Anzahl der Wires zu Beginn: {len(wire_values)}")
     print(f"Anzahl der Gates zu Beginn: {len(gates)}")
     
-    while gates:
+    prev_solved = -1
+    current_solved = len(wire_values)
+    
+    while prev_solved != current_solved and gates:
+        prev_solved = current_solved
         solved_gates = []
         
         for gate in gates:
@@ -108,22 +112,29 @@ def main():
                 result = resolve_gate(gate, wire_values)
                 if result is not None:
                     wire_values[gate['result']] = result
-                    print(f"Neuer Wire hinzugefügt: {gate['result']} = {result}")
-                    solved_gates.append(gate) 
+                    print(f"Gate gelöst: {gate['wire1']} {gate['gate']} {gate['wire2']} -> {gate['result']} = {result}")
+                    solved_gates.append(gate)
         
-        if not solved_gates:
-            print("Keine weiteren Gates können gelöst werden!")
-            break
-            
         for gate in solved_gates:
             gates.remove(gate)
-        
-        print(f"Verbleibende Gates: {len(gates)}")
+            
+        current_solved = len(wire_values)
+        print(f"Verbleibende Gates: {len(gates)}, Gelöste Wires: {current_solved}")
     
-    print(f"Anzahl der Wires am Ende: {len(wire_values)}")
-    print("Finale Wire-Werte:", wire_values)
+    if gates:
+        print("\nUngelöste Gates:")
+        for gate in gates:
+            print(f"\nGate mit Result '{gate['result']}':")
+            print(f"{gate['wire1']} {gate['gate']} {gate['wire2']} -> {gate['result']}")
+            if gate['wire1'] in wire_values:
+                print(f"  {gate['wire1']}: {wire_values[gate['wire1']]}")
+            else:
+                print(f"  Fehlender Input: {gate['wire1']}")
+            if gate['wire2'] in wire_values:
+                print(f"  {gate['wire2']}: {wire_values[gate['wire2']]}")
+            else:
+                print(f"  Fehlender Input: {gate['wire2']}")
     
-
     binary, decimal = get_binary_from_z_wires(wire_values)
 
 if __name__ == "__main__":
